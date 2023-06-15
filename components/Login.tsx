@@ -2,21 +2,15 @@
 import { BuiltInProviderType } from "next-auth/providers"
 import { signIn, signOut, useSession, getProviders, LiteralUnion, ClientSafeProvider } from "next-auth/react"
 import { useState, useEffect } from "react"
-import Image from "next/image"
 
-export default function LoginPage() {
+export default function Login() {
     const [providers, setProviders] = useState<Record<LiteralUnion<BuiltInProviderType, string>, ClientSafeProvider> | null>(null)
     const { data: session, status } = useSession()
 
     const isSessionLoading = status === 'loading'
-    let reloading: boolean
     useEffect(() => {
         async function startNewProviders() {
-            if (session && !isSessionLoading) {
-                await signOut({ callbackUrl: '/' })
-                reloading = true
-            }
-            if (providers == null && !isSessionLoading && !reloading) {
+            if (providers == null && !isSessionLoading) {
                 const response = await getProviders()
                 setProviders(response)
             }
@@ -24,13 +18,19 @@ export default function LoginPage() {
         startNewProviders()
     }, [isSessionLoading])
 
+    if (session) {
+        return <button type="button" onClick={() => signOut()}
+            className=" text-red-200 hover:text-black transition-all duration-300 p-2 rounded-full">
+            Logout</button>
+    }
+
     return (
         <div className="flex flex-col gap-10 w-full h-full justify-center items-center pb-10 bg-red-50">
             {(providers && !isSessionLoading)
                 ?
                 Object.values(providers).map((provider) => (
                     <button type="button" key={provider.name} onClick={() => signIn(provider.id, { callbackUrl: "/" })}
-                        className="text-5xl text-red-200 bg-red-600 hover:text-black transition-all duration-300 p-2 rounded-full">
+                        className=" text-red-200 hover:text-black transition-all duration-300 p-2 rounded-full">
                         Sign In
                     </button>
                 ))

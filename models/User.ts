@@ -10,12 +10,6 @@ const UserSchema = new Schema({
         type: String,
         required: [true, 'Username is required!'],
     },
-    password: {
-        type: String,
-    },
-    online: {
-        type: Boolean
-    },
     image: {
         type: String
     }
