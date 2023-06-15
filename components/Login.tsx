@@ -18,15 +18,10 @@ export default function Login() {
         startNewProviders()
     }, [isSessionLoading])
 
-    if (session) {
-        return <button type="button" onClick={() => signOut()}
-            className=" text-red-200 hover:text-black transition-all duration-300 p-2 rounded-full">
-            Logout</button>
-    }
 
     return (
-        <div className="flex flex-col gap-10 w-full h-full justify-center items-center pb-10 bg-red-50">
-            {(providers && !isSessionLoading)
+        <div className="flex flex-col justify-end items-center h-30 w-30 z-20 mr-5 bg-transparent">
+            {(providers && !isSessionLoading && !session)
                 ?
                 Object.values(providers).map((provider) => (
                     <button type="button" key={provider.name} onClick={() => signIn(provider.id, { callbackUrl: "/" })}
@@ -35,11 +30,20 @@ export default function Login() {
                     </button>
                 ))
                 :
-                (
-                    <div className="w-full flex flex-col justify-center items-center text-center h-20" >
-                        <div className="animate-spin rounded-full h-20 w-20 border-t-2 border-b-2 border-red-500"></div>
-                    </div>
-                )}
+                session
+                    ?
+                    (
+                        <button type="button" onClick={() => signOut()}
+                            className=" text-red-200 hover:text-black transition-all duration-300 p-2 rounded-full">
+                            Logout
+                        </button>
+                    )
+                    :
+                    (
+                        <div className="w-full flex flex-col justify-center items-center text-center h-20" >
+                            <div className="animate-spin rounded-full h-20 w-20 border-t-2 border-b-2 border-red-500"></div>
+                        </div>
+                    )}
         </div>
     )
 }
