@@ -1,4 +1,5 @@
 import './globals.css'
+import Provider from '@/components/Provider'
 import { Inter } from 'next/font/google'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -15,7 +16,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <Provider>
+        <body className={inter.className}>
+          <main className="flex flex-col bg-gray-200" style={{ height: '100dvh' }}>
+            {children}
+          </main>
+        </body>
+      </Provider>
     </html>
   )
 }

@@ -1,0 +1,6 @@
+-NEXTJS13
+-MONGOOSE/MONGODB
+-SERVER-RENDERED LAYOUTS/SIMPLE COMPONENTS
+-TEMP AUTHENTICATION WITH SIMPLE USERNAME/PASSWORD COMBO- NOT SUPER SECURE BUT, WHATEVER. -> basically username and password but only one option -> if logged in with user context you gain access to edit rights.
+-FIND A WAY TO DO JWT IN NEXTJS13?? 
+
