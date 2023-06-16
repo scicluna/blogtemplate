@@ -40,8 +40,8 @@ export default function Login() {
                     )
                     :
                     (
-                        <div className="w-full flex flex-col justify-center items-center text-center h-20" >
-                            <div className="animate-spin rounded-full h-20 w-20 border-t-2 border-b-2 border-red-500"></div>
+                        <div className="p-2" >
+                            <div className="animate-bounce border-red-500 w-full h-full text-red-200">...........</div>
                         </div>
                     )}
         </div>
