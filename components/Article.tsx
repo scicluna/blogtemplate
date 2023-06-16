@@ -1,6 +1,9 @@
+'use client'
 import Link from "next/link"
+import { useState, useEffect } from "react"
 
 export type ArticleStruct = {
+    _id: string
     author: {
         email: string
         username: string
@@ -14,29 +17,35 @@ export type ArticleStruct = {
     createdAt: string
     updatedAt: string
 }
-
 type ArticleProps = {
     article: ArticleStruct
 }
 
 export default function Article({ article }: ArticleProps) {
+    const [bodyWidth, setBodyWidth] = useState<number>(window.innerWidth / .7)
+
+    useEffect(() => {
+        function handleResize() {
+            setBodyWidth(window.innerWidth / .7);
+        }
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, [])
 
     function shortBody(postBody: string) {
-        //cut off the body at some point and create a link that leads to the full article
-        //start with arbitrary characters and see how it looks
-        //cutoff needs to be dynamic with viewport
-        let newBody = ""
-        for (let i = 0; i < postBody.length; i++) {
-            if (i < 700) newBody += postBody[i]
-        }
-        newBody += `...`
+        if (bodyWidth > postBody.length) {
+            return (
+                <h3 className="text-sm">{postBody}</h3>
+            )
+        } else {
+            const newBody = postBody.slice(0, bodyWidth) + '...'
+            return (
+                <>
+                    <h3 className="text-sm">{newBody} <Link className="text-sm text-blue-300 hover:text-blue-500 font-extrabold" href={`/articles/${article._id}`}>Read More</Link></h3>
 
-        return (
-            <>
-                <h3>{newBody}</h3>
-                <Link href={'/article/id'}>Read More...</Link>
-            </>
-        )
+                </>
+            )
+        }
     }
 
     return (
@@ -46,7 +55,9 @@ export default function Article({ article }: ArticleProps) {
                 <h2 className="font-serif">{article.author.username}</h2>
                 <h2 className="font-serif">{article.updatedAt}</h2>
             </div>
-            <h1>{shortBody(article.postBody)}</h1>
+            <div className="overflow-auto relative h-full">
+                {shortBody(article.postBody)}
+            </div>
         </div>
     )
 }

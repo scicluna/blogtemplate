@@ -53,8 +53,7 @@ const handler = NextAuth({
                     await User.create({
                         email: profile!.email,
                         username: profile!.name?.replace(" ", ""),
-                        image: profile!.image,
-                        online: true
+                        image: profile!.image
                     })
                 }
                 return true;
