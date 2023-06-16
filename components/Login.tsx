@@ -20,7 +20,7 @@ export default function Login() {
 
 
     return (
-        <div className="flex flex-col justify-end items-center h-30 w-30 z-20 mr-5 bg-transparent">
+        <div className="flex flex-col justify-end items-center h-30 w-40 z-20 mr-5 bg-transparent">
             {(providers && !isSessionLoading && !session)
                 ?
                 Object.values(providers).map((provider) => (
