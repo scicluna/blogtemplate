@@ -38,17 +38,12 @@ const handler = NextAuth({
         async signIn({ profile }) {
             try {
                 if (!profile || !profile.email) return false
-
                 if (!process.env.ADMIN?.split(',').includes(profile.email)) return false
-                // serverless -> lambda function -> dynamodb
                 await connectToDB();
-                // check if user already exists
+
                 const userExists = await User.findOne({
                     email: profile.email
                 })
-
-
-                // if not, create a new user and save it to DB
                 if (!userExists) {
                     await User.create({
                         email: profile!.email,

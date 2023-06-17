@@ -24,7 +24,7 @@ export default function CarouselArea() {
     }, [])
 
     return (
-        <div className="shadow-md shadow-red-200 bg-red-500 text-red-50 flex h-2/6 relative">
+        <div className="shadow-md shadow-red-200 bg-red-400 text-red-50 flex h-2/6 relative p-2">
             {carouselArticles
                 ?
                 <>

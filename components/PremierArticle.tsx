@@ -26,7 +26,7 @@ export default function PremierArticle() {
                 ?
                 <Article article={premier[0]} />
                 :
-                <div className="w-full h-full flex flex-col justify-center items-center text-center" >
+                <div className="w-full h-2/6 flex flex-col justify-center items-center text-center" >
                     <div className="animate-spin rounded-full h-20 w-20 border-t-2 border-b-2 border-red-500"></div>
                 </div>
             }

@@ -2,8 +2,11 @@
 
 export default function Footer() {
     return (
-        <nav className="shadow-md shadow-red-200 bg-red-100 flex h-1/6 relative">
-            <h1>Footer</h1>
-        </nav>
+        <footer className="flex flex-col gap-2 shadow-md justify-center items-center shadow-red-200 h-96 relative bg-red-800 text-red-200 p-2">
+            <h1>https://github.com/scicluna</h1>
+            <h1>sciclunajl@gmail.com</h1>
+            <h1>248-331-6379</h1>
+            <h1>Template By: JLS</h1>
+        </footer>
     )
 }
