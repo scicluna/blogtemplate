@@ -18,10 +18,11 @@ export type ArticleStruct = {
     updatedAt: string
 }
 type ArticleProps = {
-    article: ArticleStruct
+    article: ArticleStruct,
+    short?: boolean
 }
 
-export default function Article({ article }: ArticleProps) {
+export default function Article({ article, short = true }: ArticleProps) {
     const [bodyWidth, setBodyWidth] = useState<number>(window.innerWidth / .7)
 
     useEffect(() => {
@@ -62,8 +63,8 @@ export default function Article({ article }: ArticleProps) {
                 <h2 className="font-serif text-xl">{article.author.username}</h2>
                 <h2 className="font-serif text-xl">{getDate(article.updatedAt)}</h2>
             </div>
-            <div className="overflow-auto relative h-full">
-                {shortBody(article.postBody)}
+            <div className="overflow-auto relative">
+                {short ? shortBody(article.postBody) : article.postBody}
             </div>
         </div>
     )

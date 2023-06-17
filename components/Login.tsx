@@ -18,7 +18,6 @@ export default function Login() {
         startNewProviders()
     }, [isSessionLoading])
 
-
     return (
         <div className="flex flex-col justify-end items-center h-30 w-40 z-20 mr-5 bg-transparent">
             {(providers && !isSessionLoading && !session)
@@ -33,7 +32,7 @@ export default function Login() {
                 session
                     ?
                     (
-                        <button type="button" onClick={() => signOut()}
+                        <button type="button" onClick={() => signOut({ callbackUrl: "/" })}
                             className=" text-red-200 hover:text-black transition-all duration-300 p-2 rounded-full">
                             Logout
                         </button>

@@ -4,6 +4,7 @@ import Post from "@/models/Post";
 export async function POST(req: Request) {
     const parsedReq = await req.json()
     const { session, header, body } = parsedReq
+    console.log('posting')
 
     try {
         await connectToDB()
