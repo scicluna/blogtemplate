@@ -37,9 +37,9 @@ const handler = NextAuth({
         },
         async signIn({ profile }) {
             try {
-                if (!profile) return false
+                if (!profile || !profile.email) return false
 
-                if (profile.email != "sciclunajl@gmail.com") return false
+                if (!process.env.ADMIN?.split(',').includes(profile.email)) return false
                 // serverless -> lambda function -> dynamodb
                 await connectToDB();
                 // check if user already exists
