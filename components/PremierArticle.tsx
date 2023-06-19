@@ -1,24 +1,12 @@
-'use client'
-import { useEffect, useState } from "react"
-import { ArticleStruct } from "./Article"
 import Article from "./Article"
 
-export default function PremierArticle() {
-    const [premier, setPremier] = useState<ArticleStruct[]>()
+async function getPremier() {
+    const response = await fetch(`${process.env.URL}/api/post/premier`)
+    return await response.json()
+}
 
-    useEffect(() => {
-        async function getPremier() {
-            const response = await fetch('/api/post/premier')
-            const premierjson = await response.json()
-
-            if (premierjson) {
-                setPremier(premierjson)
-            } else {
-                console.log("No premier article")
-            }
-        }
-        getPremier()
-    }, [])
+export default async function PremierArticle() {
+    const premier = await getPremier()
 
     return (
         <>

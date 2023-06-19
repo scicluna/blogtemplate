@@ -3,6 +3,7 @@ import Post from "@/models/Post";
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 
 export async function GET(request: Request, { params }: Params) {
+    console.log("hi")
     const { id } = params
     try {
         await connectToDB()

@@ -1,28 +1,16 @@
-'use client'
-import { useEffect, useState } from "react"
-import { ArticleStruct } from "./Article"
 import Article from "./Article"
 
 type SingleArticleProps = {
     id: string
 }
 
-export default function SingleArticle({ id }: SingleArticleProps) {
-    const [single, setSingle] = useState<ArticleStruct[]>()
+async function getSingle(id: string) {
+    const response = await fetch(`${process.env.URL}/api/post/all/${id}`)
+    return await response.json()
+}
 
-    useEffect(() => {
-        async function getSingle() {
-            const response = await fetch(`/api/post/all/${id}`)
-            const singleJson = await response.json()
-
-            if (singleJson) {
-                setSingle(singleJson)
-            } else {
-                console.log("No premier article")
-            }
-        }
-        getSingle()
-    }, [])
+export default async function SingleArticle({ id }: SingleArticleProps) {
+    const single = await getSingle(id)
 
     return (
         <>

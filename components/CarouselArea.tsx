@@ -5,7 +5,6 @@ import { ArticleStruct } from "./Article"
 import Link from "next/link"
 import Article from "./Article"
 
-
 export default function CarouselArea() {
     const [carouselArticles, setCarouselArticles] = useState<ArticleStruct[]>()
 
